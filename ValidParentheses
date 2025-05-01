@@ -1,0 +1,33 @@
+import java.util.*;
+class ValidParentheses {
+    public static boolean checkPar(String str){
+        Map<Character , Character > brp =  new HashMap<>();
+     brp.put('}','{');
+     brp.put(')','(');
+     brp.put(']','[');
+     
+     Stack<Character> stk = new Stack<>();
+     
+    for(char ele : str.toCharArray()){
+        if(brp.containsValue(ele)){
+            stk.push(ele);
+        }else if(brp.containsKey(ele)){
+            if(stk.isEmpty()|| stk.pop() != brp.get(ele)){
+                return false;
+            }
+        }
+        
+    }
+     return stk.isEmpty();
+    }
+
+    public static void main(String[] args) {
+    String str = "{[(])}";
+    
+    boolean check = checkPar(str);
+     if(check){
+         System.out.println("valid");
+     }else
+        System.out.println("invalid");
+    }
+}
